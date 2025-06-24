@@ -1,0 +1,264 @@
+/* 
+------------------------------------------------
+* Admin Dashboard Styles - Syllaverse (Enhanced)
+------------------------------------------------ 
+*/
+
+/* -----------------------------------
+ * Base Styles
+ * ----------------------------------- */
+body {
+    background-color: #FAFAFA;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+#wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* -----------------------------------
+ * Sidebar
+ * ----------------------------------- */
+#sidebar {
+    width: 250px;
+    background-color: #FFFFFF;
+    border-right: 1px solid #E3E3E3;
+    transition: all 0.3s ease-in-out;
+}
+
+#sidebar .sidebar-header {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #E3E3E3;
+    text-align: center;
+}
+
+#sidebar .sidebar-header h6 {
+    font-size: 0.9rem;
+    color: #CB3737;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+#sidebar .nav-link {
+    color: #444;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+    background-color: #FFE5E0;
+    color: #CB3737;
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 #EE6F57;
+}
+
+#sidebar .nav-link i {
+    font-size: 1.1rem;
+    color: inherit;
+}
+
+/* -----------------------------------
+ * Top Navbar
+ * ----------------------------------- */
+.navbar {
+    background-color: #FFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.navbar .dropdown-toggle {
+    font-weight: 500;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    color: #CB3737;
+}
+
+.navbar img {
+    transition: transform 0.2s ease;
+}
+
+.navbar img:hover {
+    transform: scale(1.05);
+}
+
+.navbar .position-relative span {
+    width: 9px;
+    height: 9px;
+    border: 2px solid #fff;
+}
+
+.navbar .divider {
+    width: 1px;
+    height: 24px;
+    background-color: #E3E3E3;
+}
+
+/* -----------------------------------
+ * Dropdown Menu
+ * ----------------------------------- */
+.dropdown-menu {
+    border-radius: 10px;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    border: 1px solid #E3E3E3;
+    animation-duration: 0.2s;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 8px 20px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #FFE5E0;
+    color: #CB3737;
+}
+
+/* -----------------------------------
+ * Stat Cards
+ * ----------------------------------- */
+.stat-card {
+    background-color: #FFF;
+    border-left: 5px solid #EE6F57;
+    border-radius: 10px;
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-body h3 {
+    margin: 0;
+    font-weight: 700;
+    color: #333;
+}
+
+.card-body h6 {
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+/* -----------------------------------
+ * System Logs Box
+ * ----------------------------------- */
+.card.border-0.p-3 {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+/* -----------------------------------
+ * Responsive Styles (≤768px)
+ * ----------------------------------- */
+@media (max-width: 768px) {
+    #wrapper {
+        flex-direction: column;
+    }
+
+    /* Move sidebar to bottom */
+    #sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        z-index: 1000;
+        border-top: 1px solid #E3E3E3;
+        border-right: none;
+        background-color: #FFF;
+        flex-direction: row !important;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+    }
+
+    /* Hide sidebar header on mobile */
+    .sidebar-header {
+        display: none;
+    }
+
+    #sidebar .nav {
+        flex-direction: row !important;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    #sidebar .nav-item {
+        flex: 1;
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    #sidebar .nav-link {
+        padding: 0;
+        justify-content: center;
+        font-size: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border-radius: 0;
+        border-radius: 8px;
+    }
+
+    #sidebar .nav-link .label {
+        display: none;
+    }
+
+    #sidebar .nav-link i {
+        font-size: 1.2rem;
+        margin: 0;
+        
+    }
+
+    #sidebar .nav-link:hover,
+    #sidebar .nav-link.active {
+        background-color: #FFE5E0;
+        color: #CB3737;
+        box-shadow: inset 0 -3px 0 #EE6F57;
+    }
+
+    /* Adjust page content height to account for sticky nav */
+    #page-content-wrapper {
+        padding-bottom: 60px; /* same as sidebar height */
+    }
+}
+
+
+
+
+/* Syllabus Card */
+.syllabus-card {
+    background-color: #FFF;
+    border-left: 5px solid #EE6F57;
+    border-radius: 10px;
+    transition: box-shadow 0.2s ease;
+}
+
+.syllabus-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07);
+}
+
+.badge.bg-warning {
+    background-color: #FFE5E0 !important;
+    color: #CB3737 !important;
+    font-size: 0.75rem;
+}

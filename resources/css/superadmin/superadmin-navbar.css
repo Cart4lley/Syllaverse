@@ -1,0 +1,65 @@
+/* 
+------------------------------------------------
+* File: resources/css/superadmin/superadmin-navbar.css
+------------------------------------------------ 
+*/
+
+
+/* -----------------------------------
+ * Top Navbar
+ * ----------------------------------- */
+.navbar {
+    background-color: #FFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.navbar .dropdown-toggle {
+    font-weight: 500;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.navbar .dropdown-toggle:hover {
+    color: #CB3737;
+}
+
+.navbar img {
+    transition: transform 0.2s ease;
+}
+
+.navbar img:hover {
+    transform: scale(1.05);
+}
+
+.navbar .position-relative span {
+    width: 9px;
+    height: 9px;
+    border: 2px solid #fff;
+}
+
+.navbar .divider {
+    width: 1px;
+    height: 24px;
+    background-color: #E3E3E3;
+}
+
+/* -----------------------------------
+ * Dropdown Menu
+ * ----------------------------------- */
+.dropdown-menu {
+    border-radius: 10px;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    border: 1px solid #E3E3E3;
+    animation-duration: 0.2s;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 8px 20px;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #FFE5E0;
+    color: #CB3737;
+}

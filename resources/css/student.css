@@ -1,0 +1,49 @@
+/* 
+* resources/css/student.css
+*/
+body {
+    background-color: #F5F5F5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.google-btn {
+    background-color: #EE6F57;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    border: none;
+}
+
+.google-btn img {
+    width: 22px;
+    filter: brightness(0) invert(1);
+}
+
+.google-btn:hover {
+    background-color: #CB3737;
+    transform: scale(1.03);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .google-btn {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+}
+
+.course-calendar-badge {
+    display: inline-block;
+    background-color: #FFE5E0;
+    color: #CB3737;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}

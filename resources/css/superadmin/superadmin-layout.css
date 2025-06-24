@@ -1,0 +1,19 @@
+/* 
+------------------------------------------------
+* File: resources/css/superadmin/superadmin-layout.css
+------------------------------------------------ 
+*/
+
+body {
+    background-color: #FAFAFA;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: 0;
+}
+
+#wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+

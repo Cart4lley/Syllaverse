@@ -1,0 +1,57 @@
+
+/* 
+------------------------------------------------
+* File: resources/css/superadmin/superadmin-sidebar.css
+------------------------------------------------ 
+*/
+
+
+
+/* -----------------------------------
+ * Sidebar
+ * ----------------------------------- */
+#sidebar {
+    width: 250px;
+    background-color: #FFFFFF;
+    border-right: 1px solid #E3E3E3;
+    transition: all 0.3s ease-in-out;
+}
+
+#sidebar .sidebar-header {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #E3E3E3;
+    text-align: center;
+}
+
+#sidebar .sidebar-header h6 {
+    font-size: 0.9rem;
+    color: #CB3737;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+}
+
+#sidebar .nav-link {
+    color: #444;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+    background-color: #FFE5E0;
+    color: #CB3737;
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 #EE6F57;
+}
+
+#sidebar .nav-link i {
+    font-size: 1.1rem;
+    color: inherit;
+}

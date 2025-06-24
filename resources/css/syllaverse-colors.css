@@ -1,0 +1,61 @@
+/*
+------------------------------------------------
+* File: resources/css/syllaverse-colors.css
+* Description: Defines Syllaverse color palette variables
+------------------------------------------------
+*/
+:root {
+  /* Light background */
+  --color-light-bg: #FAFAFA;
+  /* Muted border/text */
+  --color-muted: #E3E3E3;
+  /* Primary accent */
+  --color-primary: #EE6F57;
+  /* Dark primary accent */
+  --color-primary-dark: #CB3737;
+}
+
+/* Utility classes */
+.bg-sv-light {
+  background-color: var(--color-light-bg) !important;
+}
+.text-sv-muted {
+  color: var(--color-muted) !important;
+}
+
+
+
+
+.text-sv-primary {
+  color: black;
+}
+.text-sv-primary:hover {
+  color: var(--color-primary-dark) !important;
+}
+.text-sv-primary:active {
+  color: var(--color-primary-dark) !important;
+}
+
+.text-sv-primary:active {
+  color: var(--color-primary) !important;
+}
+
+
+
+
+.bg-sv-primary {
+  background-color: var(--color-primary-dark) !important;
+}
+.btn-sv-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+.btn-sv-primary:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+.border-sv-muted {
+  border-color: var(--color-muted) !important;
+}
+

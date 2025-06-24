@@ -1,0 +1,21 @@
+#masterDataSubTabs .nav-link {
+    color: #4A4A4A;
+    font-weight: 500;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+#masterDataSubTabs .nav-link:hover {
+    border-bottom: 3px solid #E3E3E3;
+    color: #CB3737;
+}
+
+#masterDataSubTabs .nav-link.active {
+    border-bottom: 3px solid #CB3737;
+    color: #CB3737;
+    font-weight: 600;
+}
