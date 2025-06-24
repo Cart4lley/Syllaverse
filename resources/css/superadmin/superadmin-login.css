@@ -1,0 +1,181 @@
+/* 
+------------------------------------------------
+* Admin & Faculty Login Styling
+* File: resources/css/superadmin/superadmin-login.css
+------------------------------------------------ 
+*/
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FAFAFA;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* LEFT SECTION (Branding Panel) */
+.left-section {
+    background: linear-gradient(135deg, #EE6F57, #CB3737);
+    color: white;
+    padding: 60px 40px;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.left-section img.logo {
+    max-width: 260px;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+.left-section h2.tagline {
+    font-size: 1.8rem;
+    font-weight: 600;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+.left-section p.description {
+    line-height: 1.6;
+    font-size: 1rem;
+    opacity: 0.9;
+    z-index: 1;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+
+.left-section blockquote.quote {
+    font-style: italic;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    z-index: 1;
+    margin-top: 1.5rem;
+}
+
+.left-section small.footer-note {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.left-section .background-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.08;
+    width: 160px;
+    z-index: 0;
+}
+
+/* LOGIN BOX */
+.login-box {
+    background: white;
+    border: 1px solid #E3E3E3;
+    border-radius: 20px;
+    padding: 50px 40px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+/* GOOGLE BUTTON */
+.google-btn {
+    background: #EE6F57;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+    border-radius: 8px;
+}
+
+.google-btn:hover {
+    background: #CB3737;
+    transform: scale(1.02);
+}
+
+.google-btn img {
+    width: 20px;
+    margin-right: 10px;
+    filter: brightness(0) invert(1);
+}
+
+/* FOOTER */
+footer {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 30px;
+    color: #999;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .left-section {
+        height: auto;
+        padding: 30px 20px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .left-section img.logo {
+        max-width: 180px;
+    }
+
+    .left-section h2.tagline {
+        font-size: 1.4rem;
+    }
+
+    .left-section p.description,
+    .left-section blockquote.quote {
+        display: none;
+    }
+
+    .left-section small.footer-note {
+        margin-top: 1rem;
+        font-size: 0.7rem;
+    }
+
+    .login-box {
+        padding: 40px 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .left-section {
+        padding: 20px 10px;
+    }
+
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .google-btn {
+        font-size: 0.95rem;
+    }
+
+    .google-btn img {
+        width: 18px;
+    }
+}
+
+
+

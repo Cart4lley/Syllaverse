@@ -22,7 +22,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     {{-- Link to compiled CSS via Vite --}}
-    @vite('resources/css/admin-faculty.css')
+    @vite('resources/css/superadmin/superadmin-login.css')
+
 </head>
 
 <body>
