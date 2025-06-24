@@ -4,8 +4,8 @@
 ------------------------------------------------ --}}
 @extends('layouts.superadmin')
 
-@section('title', 'Skills and Outcomes • Super Admin • Syllaverse')
-@section('page-title', 'Skills and Outcomes')
+@section('title', 'Master Data • Super Admin • Syllaverse')
+@section('page-title', 'Master Data')
 
 @section('content')
 <ul class="nav nav-tabs mb-4" id="mainMasterTabs" role="tablist">
@@ -22,7 +22,7 @@
     <div class="tab-pane fade show active" id="masterdata" role="tabpanel">
         <!-- Sub-tabs: SDG, ILO, IGA, SO, CDIO -->
         <ul class="nav mb-4" id="masterDataSubTabs" role="tablist">
-            @foreach (['sdg' => 'SDG', 'ilo' => 'ILO', 'iga' => 'IGA', 'so' => 'SO', 'cdio' => 'CDIO'] as $id => $label)
+            @foreach (['sdg' => 'SDG', 'iga' => 'IGA', 'so' => 'SO', 'cdio' => 'CDIO'] as $id => $label)
                 <li class="nav-item">
                     <button class="nav-link sv-subtab @if ($loop->first) active @endif" id="{{ $id }}-tab"
                         data-bs-toggle="pill" data-bs-target="#{{ $id }}" type="button" role="tab">
