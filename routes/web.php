@@ -2,21 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminAuthController;
-use App\Http\Controllers\SuperAdmin\DepartmentController;
+use App\Http\Middleware\SuperAdminAuth;
+
 
 // Root Welcome Page
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Super Admin Auth & Pages
+// Super Admin Auth Routes
 Route::get('/superadmin/login', function () {
     return view('auth.superadmin-login');
 })->name('superadmin.login.form');
 
 Route::post('/superadmin/login', [SuperAdminAuthController::class, 'login'])->name('superadmin.login');
 
-
+// Protected Super Admin Routes
+Route::middleware([SuperAdminAuth::class])->group(function () {
     Route::view('/superadmin/dashboard', 'superadmin.dashboard');
     Route::view('/superadmin/departments', 'superadmin.departments');
     Route::view('/superadmin/manage-accounts', 'superadmin.manage-accounts');
@@ -25,6 +27,7 @@ Route::post('/superadmin/login', [SuperAdminAuthController::class, 'login'])->na
     Route::view('/superadmin/system-logs', 'superadmin.system-logs');
     Route::view('/superadmin/notifications', 'superadmin.notifications');
     Route::post('/superadmin/logout', [SuperAdminAuthController::class, 'logout'])->name('superadmin.logout');
+});
 
 
 // Admin Auth & Dashboard
@@ -43,7 +46,7 @@ Route::get('/student/login', function () {
     return view('auth.student-login');
 });
 
-
+// Test Middleware (for testing purposes)
 Route::middleware(['test'])->get('/test-middleware', function () {
     return 'If you see "TestMiddleware is working!", the middleware works!';
 });
