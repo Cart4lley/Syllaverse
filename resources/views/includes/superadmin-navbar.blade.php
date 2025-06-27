@@ -10,13 +10,20 @@
                 <a class="d-flex align-items-center text-decoration-none dropdown-toggle" href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="fw-semibold text-dark">Super Admin</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow-sm animate__animated animate__fadeIn" aria-labelledby="profileDropdown" style="min-width: 180px;">
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
-                    {{-- Archives removed --}}
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item d-flex align-items-center text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
-                </ul>
+<ul class="dropdown-menu dropdown-menu-end shadow-sm animate__animated animate__fadeIn" aria-labelledby="profileDropdown" style="min-width: 180px;">
+    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-person me-2"></i> Profile</a></li>
+    <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+        <form action="{{ route('superadmin.logout') }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="dropdown-item d-flex align-items-center text-danger" style="border: none; background: none;">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+            </button>
+        </form>
+    </li>
+</ul>
+
             </div>
         </div>
     </div>

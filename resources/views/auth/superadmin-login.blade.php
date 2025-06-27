@@ -70,11 +70,24 @@
                 <div class="login-box text-center">
                     <h5 class="mb-4 text-muted fw-semibold">Super Admin Login</h5>
 
-                    {{-- Google Login Button --}}
-                    <button class="btn google-btn d-flex align-items-center justify-content-center rounded-3 p-2">
-                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" />
-                        Sign in with Google
-                    </button>
+                    {{-- Username/Password Login Form --}}
+                    <form method="POST" action="{{ route('superadmin.login') }}" class="text-start">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" id="username" class="form-control" required autofocus autocomplete="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" required autocomplete="current-password">
+                        </div>
+                        @if(session('error'))
+                            <div class="alert alert-danger mt-2">{{ session('error') }}</div>
+                        @endif
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-danger rounded-3 py-2 fw-semibold">Login</button>
+                        </div>
+                    </form>
 
                     <footer>
                         <hr class="my-4" />
