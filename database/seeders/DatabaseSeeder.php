@@ -19,5 +19,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+
+        SuperAdmin::create([
+            'username' => 'superadmin',
+            'password' => 'superadmin', // will be hashed by the model mutator
+        ]);
     }
+
+
+    
 }

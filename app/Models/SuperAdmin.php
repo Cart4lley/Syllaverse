@@ -1,4 +1,5 @@
 <?php
+// File: app/Models/SuperAdmin.php
 
 namespace App\Models;
 
