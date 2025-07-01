@@ -2,51 +2,70 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminAuthController;
-use App\Http\Middleware\SuperAdminAuth;
+use App\Http\Controllers\SuperAdmin\DepartmentController;
 
-
+// ----------------------
 // Root Welcome Page
+// ----------------------
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Super Admin Auth Routes
+// ----------------------
+// Super Admin Authentication
+// ----------------------
 Route::get('/superadmin/login', function () {
     return view('auth.superadmin-login');
-})->name('superadmin.login.form');
+})->name('login'); // Only the 'login' name
 
 Route::post('/superadmin/login', [SuperAdminAuthController::class, 'login'])->name('superadmin.login');
+Route::post('/superadmin/logout', [SuperAdminAuthController::class, 'logout'])->name('superadmin.logout');
 
-// Protected Super Admin Routes
-Route::middleware([SuperAdminAuth::class])->group(function () {
-    Route::view('/superadmin/dashboard', 'superadmin.dashboard');
-    Route::view('/superadmin/departments', 'superadmin.departments');
-    Route::view('/superadmin/manage-accounts', 'superadmin.manage-accounts');
-    Route::view('/superadmin/master-data', 'superadmin.master-data');
-    Route::view('/superadmin/class-suspension', 'superadmin.class-suspension');
-    Route::view('/superadmin/system-logs', 'superadmin.system-logs');
-    Route::view('/superadmin/notifications', 'superadmin.notifications');
-    Route::post('/superadmin/logout', [SuperAdminAuthController::class, 'logout'])->name('superadmin.logout');
+// ----------------------
+// Super Admin Protected Routes
+// ----------------------
+Route::middleware(['auth'])->prefix('superadmin')->group(function () {
+    // Dashboard & Static Pages
+    Route::view('/dashboard', 'superadmin.dashboard')->name('superadmin.dashboard');
+    Route::view('/manage-accounts', 'superadmin.manage-accounts')->name('superadmin.manage-accounts');
+    Route::view('/master-data', 'superadmin.master-data')->name('superadmin.master-data');
+    Route::view('/class-suspension', 'superadmin.class-suspension')->name('superadmin.class-suspension');
+    Route::view('/system-logs', 'superadmin.system-logs')->name('superadmin.system-logs');
+    Route::view('/notifications', 'superadmin.notifications')->name('superadmin.notifications');
+
+    // Department Management (CRUD)
+    Route::get('/departments', [DepartmentController::class, 'index'])->name('superadmin.departments.index');
+    Route::post('/departments', [DepartmentController::class, 'store'])->name('superadmin.departments.store');
+    Route::put('/departments/{id}', [DepartmentController::class, 'update'])->name('superadmin.departments.update');
+    Route::delete('/departments/{id}', [DepartmentController::class, 'destroy'])->name('superadmin.departments.destroy');
 });
 
-
-// Admin Auth & Dashboard
+// ----------------------
+// Admin Authentication & Dashboard
+// ----------------------
 Route::get('/admin/login', function () {
     return view('auth.admin-login');
-});
-Route::view('/admin/dashboard', 'admin.dashboard');
+})->name('admin.login.form');
 
-// Faculty Auth
+Route::view('/admin/dashboard', 'admin.dashboard')->name('admin.dashboard');
+
+// ----------------------
+// Faculty Authentication
+// ----------------------
 Route::get('/faculty/login', function () {
     return view('auth.faculty-login');
-});
+})->name('faculty.login.form');
 
-// Student Auth
+// ----------------------
+// Student Authentication
+// ----------------------
 Route::get('/student/login', function () {
     return view('auth.student-login');
-});
+})->name('student.login.form');
 
-// Test Middleware (for testing purposes)
+// ----------------------
+// Test Middleware Route (for testing purposes)
+// ----------------------
 Route::middleware(['test'])->get('/test-middleware', function () {
     return 'If you see "TestMiddleware is working!", the middleware works!';
 });

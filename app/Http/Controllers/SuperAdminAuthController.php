@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\SuperAdmin;
+use Illuminate\Support\Facades\Auth;
 
 class SuperAdminAuthController extends Controller
 {
@@ -15,26 +16,21 @@ class SuperAdminAuthController extends Controller
      */
     public function login(Request $request)
     {
-        // Validate input
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        // Fetch the superadmin by username
         $superadmin = SuperAdmin::where('username', $request->username)->first();
 
         if ($superadmin && Hash::check($request->password, $superadmin->password)) {
-            // Optionally regenerate session to prevent fixation
-            $request->session()->regenerate();
+            Auth::login($superadmin); // Laravel Auth!
 
-            // Store superadmin session
-            Session::put('superadmin_logged_in', true);
-            Session::put('superadmin_id', $superadmin->id);
+            $request->session()->regenerate();
 
             return redirect('/superadmin/dashboard');
         } else {
-            return redirect()->route('superadmin.login.form')
+            return redirect()->route('login')
                 ->with('error', 'Invalid username or password.');
         }
     }
@@ -44,12 +40,13 @@ class SuperAdminAuthController extends Controller
      */
     public function logout(Request $request)
     {
-        // Flush only superadmin session variables
-        Session::forget(['superadmin_logged_in', 'superadmin_id']);
-        // Optionally invalidate the session
+        Auth::logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('superadmin.login.form');
+        return redirect()->route('login');
+
     }
+
 }
