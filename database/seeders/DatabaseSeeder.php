@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\SuperAdmin;
+use App\Models\GeneralInformation;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,20 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // // Example user creation
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // // Super Admin account
+        // SuperAdmin::create([
+        //     'username' => 'superadmin',
+        //     'password' => 'superadmin', // Should be hashed by a mutator in the model
+        // ]);
+            $this->call([
+        GeneralInformationSeeder::class,
+    ]);
 
-
-        SuperAdmin::create([
-            'username' => 'superadmin',
-            'password' => 'superadmin', // will be hashed by the model mutator
-        ]);
     }
-
-
-    
 }
