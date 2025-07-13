@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdmin\AuthController;
 use App\Http\Controllers\SuperAdmin\DepartmentController;
 use App\Http\Controllers\SuperAdmin\MasterDataController;
+use App\Http\Controllers\SuperAdmin\ManageAdminController;
 use App\Http\Middleware\SuperAdminAuth;
 
 // ---------- Public Super Admin Login ----------
@@ -26,12 +27,16 @@ Route::middleware([SuperAdminAuth::class])->prefix('superadmin')->group(function
     // ---------- Logout ----------
     Route::post('/logout', [AuthController::class, 'logout'])->name('superadmin.logout');
 
-    // ---------- Dashboard & Static Pages ----------
+    // ---------- Dashboard & Pages ----------
     Route::view('/dashboard', 'superadmin.dashboard')->name('superadmin.dashboard');
-    Route::view('/manage-accounts', 'superadmin.manage-accounts')->name('superadmin.manage-accounts');
+    Route::get('/manage-accounts', [ManageAdminController::class, 'index'])->name('superadmin.manage-accounts');
     Route::view('/class-suspension', 'superadmin.class-suspension')->name('superadmin.class-suspension');
     Route::view('/system-logs', 'superadmin.system-logs')->name('superadmin.system-logs');
     Route::view('/notifications', 'superadmin.notifications')->name('superadmin.notifications');
+
+    // ---------- Manage Admin Accounts ----------
+    Route::post('/manage-accounts/admins/{id}/approve', [ManageAdminController::class, 'approve'])->name('superadmin.approve.admin');
+    Route::post('/manage-accounts/admins/{id}/reject', [ManageAdminController::class, 'reject'])->name('superadmin.reject.admin');
 
     // ---------- Master Data ----------
     Route::prefix('master-data')->group(function () {

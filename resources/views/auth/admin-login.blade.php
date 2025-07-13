@@ -1,7 +1,7 @@
 {{-- 
 ------------------------------------------------
-* resources/views/auth/admin-login.blade.php
-* Admin Login Page (Syllaverse) with logo-only branding
+* File: resources/views/auth/admin-login.blade.php
+* Description: Admin Login Page (Syllaverse) with logo-only branding
 ------------------------------------------------ 
 --}}
 <!DOCTYPE html>
@@ -74,11 +74,32 @@
                 <div class="login-box text-center">
                     <h5 class="mb-4 text-muted fw-semibold">Admin Login</h5>
 
+                    {{-- Alert for invalid email domain --}}
+                    @if ($errors->has('email'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('email') }}
+                        </div>
+                    @endif
+
+                    {{-- Alert for rejected account --}}
+                    @if ($errors->has('rejected'))
+                        <div class="alert alert-danger">
+                            {{ $errors->first('rejected') }}
+                        </div>
+                    @endif
+
+                    {{-- Alert if account is not yet approved --}}
+                    @if ($errors->has('approval'))
+                        <div class="alert alert-warning">
+                            {{ $errors->first('approval') }}
+                        </div>
+                    @endif
+
                     {{-- Google Login Button --}}
-                    <button class="btn google-btn d-flex align-items-center justify-content-center rounded-3 p-2">
+                    <a href="{{ route('admin.google.login') }}" class="btn google-btn d-flex align-items-center justify-content-center rounded-3 p-2">
                         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" />
                         Sign in with Google
-                    </button>
+                    </a>
 
                     <p class="text-muted mt-3 mb-0" style="font-size: 13px;">
                         Use your BSU GSuite account to access the dashboard.
