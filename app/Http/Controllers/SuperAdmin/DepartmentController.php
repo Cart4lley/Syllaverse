@@ -1,13 +1,12 @@
 <?php
 // File: app/Http/Controllers/SuperAdmin/DepartmentController.php
-// Controller for managing departments (Super Admin)
+// Description: Controller for managing departments (Super Admin)
 
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Department;
-use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +14,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments = Department::with('creator')->latest()->get();
-        return view('superadmin.departments', compact('departments'));
+        return view('superadmin.departments.index', compact('departments'));
     }
 
     // Store a new department
@@ -41,7 +40,7 @@ class DepartmentController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:25|unique:departments,code,'.$id,
+            'code' => 'required|string|max:25|unique:departments,code,' . $id,
         ]);
 
         $department->update([

@@ -1,5 +1,5 @@
 {{-- ------------------------------------------------
-* File: resources/views/superadmin/departments.blade.php
+* File: resources/views/superadmin/departments/index.blade.php
 * Description: Super Admin Departments Page (Syllaverse)
 ------------------------------------------------ --}}
 @extends('layouts.superadmin')
@@ -61,7 +61,7 @@
                     <td>{{ $department->code }}</td>
                     <td>{{ $department->created_at->format('Y-m-d') }}</td>
                     <td>
-                        <!-- Edit Button (ready for modal) -->
+                        <!-- Edit Button -->
                         <button 
                             class="btn btn-sm btn-outline-primary"
                             data-bs-toggle="modal"
@@ -90,64 +90,9 @@
     </table>
 </div>
 
-<!-- Modal: Add Department -->
-<div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-semibold" id="addDepartmentModalLabel">Add Department</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('superadmin.departments.store') }}" method="POST">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="departmentName" class="form-label">Department Name</label>
-                        <input type="text" class="form-control" id="departmentName" name="name" placeholder="Enter full department name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="departmentCode" class="form-label">Department Code</label>
-                        <input type="text" class="form-control" id="departmentCode" name="code" placeholder="e.g., CICS" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: Edit Department -->
-<div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="editDepartmentForm" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="modal-header">
-                    <h5 class="modal-title fw-semibold" id="editDepartmentModalLabel">Edit Department</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="editDepartmentName" class="form-label">Department Name</label>
-                        <input type="text" class="form-control" id="editDepartmentName" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editDepartmentCode" class="form-label">Department Code</label>
-                        <input type="text" class="form-control" id="editDepartmentCode" name="code" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-danger">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+{{-- Modals --}}
+@include('superadmin.departments.modals.addDepartmentModal')
+@include('superadmin.departments.modals.editDepartmentModal')
 @endsection
 
 @push('scripts')

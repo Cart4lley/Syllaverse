@@ -18,7 +18,7 @@ class MasterDataController extends Controller
 {
     public function index()
     {
-        return view('superadmin.master-data', [
+        return view('superadmin.master-data.index', [
             'sdgs' => Sdg::all(),
             'igas' => Iga::all(),
             'studentOutcomes' => So::all(),
@@ -93,12 +93,10 @@ class MasterDataController extends Controller
 
     public function updateGeneralInfo(Request $request, $section)
     {
-        // Validate only the specific field being saved
         $request->validate([
             $section => 'required|string'
         ]);
 
-        // Save/update only that one section's content
         GeneralInformation::updateOrCreate(
             ['section' => $section],
             ['content' => $request->input($section)]
