@@ -24,7 +24,14 @@
                     <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-gear me-2"></i> Settings</a></li>
                     <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-archive me-2"></i> Archives</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item d-flex align-items-center text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                    <li>
+                        <form action="{{ route('admin.logout') }}" method="POST" class="d-inline w-100">
+                            @csrf
+                            <button type="submit" class="dropdown-item d-flex align-items-center text-danger w-100">
+                                <i class="bi bi-box-arrow-right me-2"></i> Logout
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
         </div>
