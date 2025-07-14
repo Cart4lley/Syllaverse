@@ -22,7 +22,8 @@ class ManageAdminController extends Controller
         // ✅ Load departments for assigning to admins
         $departments = Department::orderBy('name')->get();
 
-        return view('superadmin.manage-accounts', compact(
+        // ✅ Updated to use modularized view
+        return view('superadmin.manage-accounts.index', compact(
             'pendingAdmins',
             'approvedAdmins',
             'rejectedAdmins',

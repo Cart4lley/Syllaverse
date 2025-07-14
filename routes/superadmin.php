@@ -29,7 +29,10 @@ Route::middleware([SuperAdminAuth::class])->prefix('superadmin')->group(function
 
     // ---------- Dashboard & Pages ----------
     Route::view('/dashboard', 'superadmin.dashboard')->name('superadmin.dashboard');
+
+    // ✅ Modularized Manage Accounts View
     Route::get('/manage-accounts', [ManageAdminController::class, 'index'])->name('superadmin.manage-accounts');
+
     Route::view('/class-suspension', 'superadmin.class-suspension')->name('superadmin.class-suspension');
     Route::view('/system-logs', 'superadmin.system-logs')->name('superadmin.system-logs');
     Route::view('/notifications', 'superadmin.notifications')->name('superadmin.notifications');
@@ -37,8 +40,6 @@ Route::middleware([SuperAdminAuth::class])->prefix('superadmin')->group(function
     // ---------- Manage Admin Accounts ----------
     Route::post('/manage-accounts/admins/{id}/approve', [ManageAdminController::class, 'approve'])->name('superadmin.approve.admin');
     Route::post('/manage-accounts/admins/{id}/reject', [ManageAdminController::class, 'reject'])->name('superadmin.reject.admin');
-
-    // ✅ Assign Department to Admin
     Route::post('/manage-accounts/admins/{id}/assign-department', [DepartmentController::class, 'assignAdmin'])->name('superadmin.assign.department');
 
     // ---------- Master Data ----------
