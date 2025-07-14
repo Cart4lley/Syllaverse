@@ -8,7 +8,11 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\ProfileController; // Add this
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProgramCourseController;
+use App\Http\Controllers\Admin\ProgramController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\AcademicStructureController;
 use App\Http\Middleware\AdminAuth;
 
 // Admin Login View
@@ -29,6 +33,31 @@ Route::middleware([AdminAuth::class])->group(function () {
 
     // Admin Dashboard
     Route::view('/dashboard', 'admin.dashboard')->name('admin.dashboard');
+
+    // Academic Structure Page
+    Route::get('/academic-structure', [AcademicStructureController::class, 'index'])->name('admin.academic-structure.index');
+
+    // Program Management (CRUD)
+    Route::resource('programs', ProgramController::class)->names([
+        'index'   => 'admin.programs.index',
+        'create'  => 'admin.programs.create',
+        'store'   => 'admin.programs.store',
+        'edit'    => 'admin.programs.edit',
+        'update'  => 'admin.programs.update',
+        'destroy' => 'admin.programs.destroy',
+        'show'    => 'admin.programs.show',
+    ]);
+
+    // Course Management (CRUD)
+    Route::resource('courses', CourseController::class)->only(['store', 'update', 'destroy'])->names([
+        'store'   => 'admin.courses.store',
+        'update'  => 'admin.courses.update',
+        'destroy' => 'admin.courses.destroy',
+    ]);
+
+    // Program-Course Mapping
+    Route::post('/program-courses', [ProgramCourseController::class, 'store'])->name('admin.program-courses.store');
+    Route::delete('/program-courses/{id}', [ProgramCourseController::class, 'destroy'])->name('admin.program-courses.destroy');
 
     // Logout
     Route::post('/logout', function () {

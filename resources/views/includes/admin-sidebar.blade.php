@@ -58,9 +58,11 @@
 
         {{-- Academic Structure --}}
         <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.academic-structure.index') ? 'active' : '' }}" 
+            href="{{ route('admin.academic-structure.index') }}">
                 <i class="bi bi-diagram-3"></i> <span class="label">Academic Structure</span>
             </a>
+
         </li>
 
         {{-- Separator --}}

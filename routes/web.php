@@ -7,9 +7,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Welcome Page
+// ------------------------------------------------
+// Redirect root to Super Admin login
+// ------------------------------------------------
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('superadmin.login.form');
 });
 
 // ------------------------------------------------
