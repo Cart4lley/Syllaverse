@@ -56,6 +56,13 @@
             </a>
         </li>
 
+        {{-- Academic Structure --}}
+        <li class="nav-item mb-1">
+            <a class="nav-link d-flex align-items-center gap-2" href="#">
+                <i class="bi bi-diagram-3"></i> <span class="label">Academic Structure</span>
+            </a>
+        </li>
+
         {{-- Separator --}}
         <li><hr class="my-3 text-muted"></li>
 
