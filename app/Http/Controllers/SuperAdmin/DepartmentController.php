@@ -7,6 +7,7 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Department;
+use App\Models\User;
 
 class DepartmentController extends Controller
 {
@@ -58,5 +59,19 @@ class DepartmentController extends Controller
         $department->delete();
 
         return redirect()->back()->with('success', 'Department deleted successfully!');
+    }
+
+    // Assign an admin to a department
+    public function assignAdmin(Request $request, $userId)
+    {
+        $request->validate([
+            'department_id' => 'required|exists:departments,id'
+        ]);
+
+        $user = User::where('role', 'admin')->where('status', 'active')->findOrFail($userId);
+        $user->department_id = $request->department_id;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Admin assigned to department successfully!');
     }
 }

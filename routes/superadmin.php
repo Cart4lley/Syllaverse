@@ -38,6 +38,9 @@ Route::middleware([SuperAdminAuth::class])->prefix('superadmin')->group(function
     Route::post('/manage-accounts/admins/{id}/approve', [ManageAdminController::class, 'approve'])->name('superadmin.approve.admin');
     Route::post('/manage-accounts/admins/{id}/reject', [ManageAdminController::class, 'reject'])->name('superadmin.reject.admin');
 
+    // ✅ Assign Department to Admin
+    Route::post('/manage-accounts/admins/{id}/assign-department', [DepartmentController::class, 'assignAdmin'])->name('superadmin.assign.department');
+
     // ---------- Master Data ----------
     Route::prefix('master-data')->group(function () {
         Route::get('/', [MasterDataController::class, 'index'])->name('superadmin.master-data');

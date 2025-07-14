@@ -6,6 +6,7 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Department;
 
 class ManageAdminController extends Controller
 {
@@ -14,15 +15,20 @@ class ManageAdminController extends Controller
         $pendingAdmins = User::where('role', 'admin')->where('status', 'pending')->get();
         $approvedAdmins = User::where('role', 'admin')->where('status', 'active')->get();
         $rejectedAdmins = User::where('role', 'admin')->where('status', 'rejected')->get();
+
         $faculty = User::where('role', 'faculty')->get();
         $students = User::where('role', 'student')->get();
+
+        // ✅ Load departments for assigning to admins
+        $departments = Department::orderBy('name')->get();
 
         return view('superadmin.manage-accounts', compact(
             'pendingAdmins',
             'approvedAdmins',
             'rejectedAdmins',
             'faculty',
-            'students'
+            'students',
+            'departments'
         ));
     }
 

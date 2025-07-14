@@ -1,8 +1,14 @@
 <?php
 
+// ------------------------------------------------
+// File: routes/admin.php
+// Description: Admin specific routes for Syllaverse
+// ------------------------------------------------
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ProfileController; // Add this
 use App\Http\Middleware\AdminAuth;
 
 // Admin Login View
@@ -14,7 +20,11 @@ Route::get('/login', function () {
 Route::get('/login/google', [AuthController::class, 'redirectToGoogle'])->name('admin.google.login');
 Route::get('/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('admin.google.callback');
 
-// Protected Admin Routes (Requires role = admin)
+// Profile Completion Form (Accessible even without complete profile)
+Route::get('/complete-profile', [ProfileController::class, 'showCompleteForm'])->name('admin.complete-profile');
+Route::post('/complete-profile', [ProfileController::class, 'submitProfile'])->name('admin.submit-profile');
+
+// Protected Admin Routes (Requires role = admin and complete profile)
 Route::middleware([AdminAuth::class])->group(function () {
 
     // Admin Dashboard

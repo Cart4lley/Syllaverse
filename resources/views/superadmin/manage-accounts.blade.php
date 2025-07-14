@@ -23,23 +23,20 @@
 <div class="tab-content">
     <!-- Admins Tab -->
     <div class="tab-pane fade show active" id="admins" role="tabpanel">
-        <!-- Sub-tabs: Pending, Approved & Rejected -->
+        <!-- Sub-tabs -->
         <ul class="nav mb-4" id="adminsSubTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link sv-subtab active" id="admins-pending-tab"
-                    data-bs-toggle="pill" data-bs-target="#admins-pending" type="button" role="tab">
+                <button class="nav-link sv-subtab active" id="admins-pending-tab" data-bs-toggle="pill" data-bs-target="#admins-pending" type="button" role="tab">
                     Pending Requests
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link sv-subtab" id="admins-approved-tab"
-                    data-bs-toggle="pill" data-bs-target="#admins-approved" type="button" role="tab">
+                <button class="nav-link sv-subtab" id="admins-approved-tab" data-bs-toggle="pill" data-bs-target="#admins-approved" type="button" role="tab">
                     Approved Admins
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link sv-subtab" id="admins-rejected-tab"
-                    data-bs-toggle="pill" data-bs-target="#admins-rejected" type="button" role="tab">
+                <button class="nav-link sv-subtab" id="admins-rejected-tab" data-bs-toggle="pill" data-bs-target="#admins-rejected" type="button" role="tab">
                     Rejected Admins
                 </button>
             </li>
@@ -64,7 +61,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- Loop through pending admin requests --}}
                             @foreach ($pendingAdmins as $admin)
                             <tr>
                                 <td>{{ $admin->name }}</td>
@@ -95,20 +91,34 @@
                             <input type="search" class="form-control" placeholder="Search admins..." aria-label="Search admins">
                         </div>
                     </div>
-                    <table class="table table-hover">
+                    <table class="table table-hover align-middle">
                         <thead class="table-light">
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Department</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- Loop through approved admins --}}
                             @foreach ($approvedAdmins as $admin)
                             <tr>
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
+                                <td>
+                                    <form method="POST" action="{{ route('superadmin.assign.department', $admin->id) }}" class="d-flex">
+                                        @csrf
+                                        <select name="department_id" class="form-select form-select-sm me-2" required>
+                                            <option value="">Select...</option>
+                                            @foreach ($departments as $dept)
+                                                <option value="{{ $dept->id }}" {{ $admin->department_id === $dept->id ? 'selected' : '' }}>
+                                                    {{ $dept->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="btn btn-primary btn-sm">Assign</button>
+                                    </form>
+                                </td>
                                 <td>
                                     <form method="POST" action="{{ route('superadmin.reject.admin', $admin->id) }}" class="d-inline">
                                         @csrf
@@ -140,7 +150,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- Loop through rejected admins --}}
                             @foreach ($rejectedAdmins as $admin)
                             <tr>
                                 <td>{{ $admin->name }}</td>
@@ -178,14 +187,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- Loop through faculty --}}
                     @foreach ($faculty as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>
-                            {{-- Add actions if needed --}}
-                        </td>
+                        <td></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -211,14 +217,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- Loop through students --}}
                     @foreach ($students as $student)
                     <tr>
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
-                        <td>
-                            {{-- Add actions if needed --}}
-                        </td>
+                        <td></td>
                     </tr>
                     @endforeach
                 </tbody>
