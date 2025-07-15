@@ -1,6 +1,6 @@
 <?php
 // File: app/Http/Middleware/FacultyAuth.php
-// Description: Middleware to protect faculty-only routes (Syllaverse)
+// Description: Middleware to protect faculty-only routes and ensure profile completion (Syllaverse)
 
 namespace App\Http\Middleware;
 
@@ -12,8 +12,21 @@ class FacultyAuth
 {
     public function handle(Request $request, Closure $next)
     {
+        // If user is not logged in or not a faculty, redirect to login form
         if (!Auth::check() || Auth::user()->role !== 'faculty') {
-            return redirect()->route('faculty.google.login')->with('error', 'Access denied.');
+            return redirect()->route('faculty.login.form')->with('error', 'Access denied. Please log in as faculty.');
+        }
+
+        $user = Auth::user();
+
+        // Redirect to complete profile if any required field is missing
+        if (
+            empty($user->designation) ||
+            empty($user->employee_code) ||
+            is_null($user->department_id)
+        ) {
+            return redirect()->route('faculty.complete-profile')
+                ->with('error', 'Please complete your profile before accessing the dashboard.');
         }
 
         return $next($request);
