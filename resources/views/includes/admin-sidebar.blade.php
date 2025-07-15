@@ -65,6 +65,15 @@
 
         </li>
 
+        {{-- Manage Accounts --}}
+        <li class="nav-item mb-1">
+            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.manage-accounts') ? 'active' : '' }}" 
+                href="{{ route('admin.manage-accounts') }}">
+                <i class="bi bi-person-lines-fill"></i> <span class="label">Manage Accounts</span>
+            </a>
+        </li>
+
+
         {{-- Separator --}}
         <li><hr class="my-3 text-muted"></li>
 
