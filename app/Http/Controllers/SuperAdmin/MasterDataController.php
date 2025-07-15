@@ -1,7 +1,7 @@
 <?php
 // ------------------------------------------------
 // File: app/Http/Controllers/SuperAdmin/MasterDataController.php
-// Description: Handles CRUD operations for Master Data (SDG, IGA, SO, CDIO, General Info) - Syllaverse
+// Description: Handles CRUD operations for Master Data (SDG, IGA, CDIO, General Info) - Syllaverse
 // ------------------------------------------------
 
 namespace App\Http\Controllers\SuperAdmin;
@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sdg;
 use App\Models\Iga;
-use App\Models\So;
 use App\Models\Cdio;
 use App\Models\GeneralInformation;
 
@@ -21,7 +20,6 @@ class MasterDataController extends Controller
         return view('superadmin.master-data.index', [
             'sdgs' => Sdg::all(),
             'igas' => Iga::all(),
-            'studentOutcomes' => So::all(),
             'cdios' => Cdio::all(),
             'info' => GeneralInformation::all()->keyBy('section')
         ]);
@@ -110,7 +108,6 @@ class MasterDataController extends Controller
         return [
             'sdg' => Sdg::class,
             'iga' => Iga::class,
-            'so' => So::class,
             'cdio' => Cdio::class,
         ];
     }

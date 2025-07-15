@@ -1,11 +1,11 @@
 {{-- ------------------------------------------------
 * File: resources/views/superadmin/master-data/tabs/skills-outcomes.blade.php
-* Description: Subtabs for SDG, IGA, SO, CDIO including edit modals
+* Description: Subtabs for SDG, IGA, CDIO including edit modals (SO removed)
 ------------------------------------------------ --}}
 
 {{-- Subtabs --}}
 <ul class="nav mb-4" id="masterDataSubTabs" role="tablist">
-    @foreach (['sdg' => 'SDG', 'iga' => 'IGA', 'so' => 'SO', 'cdio' => 'CDIO'] as $id => $label)
+    @foreach (['sdg' => 'SDG', 'iga' => 'IGA', 'cdio' => 'CDIO'] as $id => $label)
         <li class="nav-item">
             <button class="nav-link sv-subtab @if ($loop->first) active @endif" id="{{ $id }}-tab" data-bs-toggle="pill" data-bs-target="#{{ $id }}" type="button" role="tab">
                 {{ $label }}
@@ -19,7 +19,6 @@
     @foreach ([
         'sdg' => ['label' => 'Sustainable Development Goals', 'items' => $sdgs],
         'iga' => ['label' => 'Institutional Graduate Attributes', 'items' => $igas],
-        'so'  => ['label' => 'Student Outcomes', 'items' => $studentOutcomes],
         'cdio'=> ['label' => 'Conceive-Design-Implement-Operate', 'items' => $cdios]
     ] as $id => $data)
         <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ $id }}" role="tabpanel">
@@ -73,12 +72,10 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                @if(in_array($id, ['sdg', 'iga', 'cdio']))
                                                 <div class="mb-3">
                                                     <label for="edit-{{ $id }}-title-{{ $item->id }}" class="form-label">Title</label>
                                                     <input type="text" name="title" class="form-control" id="edit-{{ $id }}-title-{{ $item->id }}" value="{{ $item->title }}">
                                                 </div>
-                                                @endif
                                                 <div class="mb-3">
                                                     <label for="edit-{{ $id }}-description-{{ $item->id }}" class="form-label">Description</label>
                                                     <textarea name="description" class="form-control" id="edit-{{ $id }}-description-{{ $item->id }}" rows="3" required>{{ $item->description }}</textarea>
