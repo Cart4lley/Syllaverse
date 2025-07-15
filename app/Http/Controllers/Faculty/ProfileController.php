@@ -35,8 +35,11 @@ class ProfileController extends Controller
         $user->designation = $request->designation;
         $user->employee_code = $request->employee_code;
         $user->department_id = $request->department_id;
+        $user->status = 'pending'; // 🔒 Keep account pending until approved by Admin
         $user->save();
 
-        return redirect()->route('faculty.dashboard')->with('success', 'Profile completed successfully!');
+        Auth::logout(); // 🔐 Force re-login to trigger middleware again
+        return redirect()->route('faculty.login.form')
+            ->with('success', 'Profile completed. Please wait for your Program Chair to approve your account.');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 // File: app/Http/Middleware/FacultyAuth.php
-// Description: Middleware to protect faculty-only routes and ensure profile completion (Syllaverse)
+// Description: Middleware to protect faculty-only routes and ensure profile completion and approval (Syllaverse)
 
 namespace App\Http\Middleware;
 
@@ -12,14 +12,14 @@ class FacultyAuth
 {
     public function handle(Request $request, Closure $next)
     {
-        // If user is not logged in or not a faculty, redirect to login form
+        // Not logged in or not a faculty
         if (!Auth::check() || Auth::user()->role !== 'faculty') {
             return redirect()->route('faculty.login.form')->with('error', 'Access denied. Please log in as faculty.');
         }
 
         $user = Auth::user();
 
-        // Redirect to complete profile if any required field is missing
+        // Incomplete profile
         if (
             empty($user->designation) ||
             empty($user->employee_code) ||
@@ -27,6 +27,12 @@ class FacultyAuth
         ) {
             return redirect()->route('faculty.complete-profile')
                 ->with('error', 'Please complete your profile before accessing the dashboard.');
+        }
+
+        // Awaiting admin approval
+        if ($user->status !== 'active') {
+            Auth::logout();
+            return redirect()->route('faculty.login.form')->with('error', 'Your account is pending approval by your Program Chair.');
         }
 
         return $next($request);

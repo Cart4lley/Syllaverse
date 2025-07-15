@@ -59,13 +59,16 @@
 
                     {{-- Alerts --}}
                     @if(session('error'))
-                        <div class="alert alert-danger d-flex align-items-center gap-2">
-                            <i class="bi bi-exclamation-circle-fill"></i> {{ session('error') }}
+                        <div class="alert alert-danger d-flex align-items-center gap-2" role="alert">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                            <div>{{ session('error') }}</div>
                         </div>
                     @endif
+
                     @if(session('success'))
-                        <div class="alert alert-success d-flex align-items-center gap-2">
-                            <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
+                        <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <div>{{ session('success') }}</div>
                         </div>
                     @endif
 
