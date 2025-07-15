@@ -1,6 +1,6 @@
 <?php
 // File: app/Http/Controllers/Admin/AuthController.php
-// Description: Handles Google login authentication for Admin with approval and rejection check (Syllaverse)
+// Description: Handles Google login authentication for Admin with approval and role check (Syllaverse)
 
 namespace App\Http\Controllers\Admin;
 
@@ -17,7 +17,9 @@ class AuthController extends Controller
      */
     public function redirectToGoogle(): RedirectResponse
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->redirectUrl(env('GOOGLE_REDIRECT_URI_ADMIN'))
+            ->redirect();
     }
 
     /**
@@ -26,7 +28,11 @@ class AuthController extends Controller
     public function handleGoogleCallback(): RedirectResponse
     {
         try {
-            $googleUser = Socialite::driver('google')->stateless()->user();
+            $googleUser = Socialite::driver('google')
+                ->stateless()
+                ->redirectUrl(env('GOOGLE_REDIRECT_URI_ADMIN'))
+                ->user();
+
             $email = $googleUser->getEmail();
 
             // Restrict login to BSU GSuite domain
@@ -36,25 +42,34 @@ class AuthController extends Controller
                 ]);
             }
 
-            // Find or create user with pending status
-            $user = User::firstOrCreate(
-                ['email' => $email],
-                [
+            // Check if user already exists
+            $user = User::where('email', $email)->first();
+
+            if ($user) {
+                if ($user->role !== 'admin') {
+                    return redirect()->route('admin.login.form')->withErrors([
+                        'role' => 'This account is already registered as a different role.',
+                    ]);
+                }
+            } else {
+                // Register new user as admin (pending approval)
+                $user = User::create([
                     'name' => $googleUser->getName(),
+                    'email' => $email,
                     'google_id' => $googleUser->getId(),
                     'role' => 'admin',
-                    'status' => 'pending'
-                ]
-            );
+                    'status' => 'pending',
+                ]);
+            }
 
-            // Handle rejection
+            // Handle rejected admins
             if ($user->status === 'rejected') {
                 return redirect()->route('admin.login.form')->withErrors([
                     'rejected' => 'Your account has been rejected. Please contact the Super Admin.',
                 ]);
             }
 
-            // Handle unapproved accounts
+            // Handle pending admins
             if ($user->status !== 'active') {
                 return redirect()->route('admin.login.form')->withErrors([
                     'approval' => 'Your account is pending approval by the Super Admin.',

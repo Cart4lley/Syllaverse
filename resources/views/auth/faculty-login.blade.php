@@ -74,10 +74,10 @@
                     <h5 class="mb-4 text-muted fw-semibold">Faculty Login</h5>
 
                     {{-- Google Login Button --}}
-                    <button class="btn google-btn d-flex align-items-center justify-content-center rounded-3 p-2">
-                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" />
-                        Sign in with Google
-                    </button>
+                    <a href="{{ route('faculty.google.login') }}" class="btn google-btn d-flex align-items-center justify-content-center rounded-3 p-2 text-decoration-none">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" class="me-2" />
+                        <span class="fw-semibold text-dark">Sign in with Google</span>
+                    </a>
 
                     <p class="text-muted mt-3 mb-0" style="font-size: 13px;">
                         Use your BSU GSuite account to access the faculty dashboard.
