@@ -1,9 +1,7 @@
 <?php
 
-// ------------------------------------------------
 // File: routes/admin.php
 // Description: Admin specific routes for Syllaverse
-// ------------------------------------------------
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +56,8 @@ Route::middleware([AdminAuth::class])->group(function () {
     // Program-Course Mapping
     Route::post('/program-courses', [ProgramCourseController::class, 'store'])->name('admin.program-courses.store');
     Route::delete('/program-courses/{id}', [ProgramCourseController::class, 'destroy'])->name('admin.program-courses.destroy');
-
+    Route::post('/program-courses/{id}/delete', [ProgramCourseController::class, 'destroy'])->name('admin.program-courses.fallback');
+    
     // Logout
     Route::post('/logout', function () {
         Auth::logout();
@@ -67,3 +66,4 @@ Route::middleware([AdminAuth::class])->group(function () {
 
     // (Add more admin-protected routes here...)
 });
+

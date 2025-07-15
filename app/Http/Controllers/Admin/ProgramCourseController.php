@@ -12,6 +12,9 @@ use App\Models\Course;
 
 class ProgramCourseController extends Controller
 {
+    /**
+     * Store a newly mapped course to a program.
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -40,6 +43,9 @@ class ProgramCourseController extends Controller
         return back()->with('success', 'Course successfully mapped to program.');
     }
 
+    /**
+     * Remove a course mapping from a program.
+     */
     public function destroy($id)
     {
         $mapping = ProgramCourse::findOrFail($id);

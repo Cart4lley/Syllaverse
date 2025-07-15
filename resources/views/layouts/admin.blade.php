@@ -37,5 +37,8 @@
         </div>
     </div>
 
+    {{-- JS Scripts pushed from pages --}}
+    @stack('scripts')
+
 </body>
 </html>
