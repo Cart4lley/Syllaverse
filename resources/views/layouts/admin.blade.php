@@ -1,7 +1,7 @@
 {{-- 
 ------------------------------------------------
-* resources/views/layouts/admin.blade.php
-* Base layout structure for Admin pages (Syllaverse)
+* File: resources/views/layouts/admin.blade.php
+* Description: Base layout structure for Admin pages (Syllaverse)
 ------------------------------------------------ 
 --}}
 <!DOCTYPE html>
@@ -26,18 +26,29 @@
 <body class="bg-light">
 
     <div class="d-flex" id="wrapper">
+        {{-- Sidebar --}}
         @include('includes.admin-sidebar')
 
+        {{-- Page Content --}}
         <div id="page-content-wrapper" class="w-100">
             @include('includes.admin-navbar')
 
             <div class="container-fluid px-4 py-4">
+                {{-- Flash Message --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                {{-- Page Content --}}
                 @yield('content')
             </div>
         </div>
     </div>
 
-    {{-- JS Scripts pushed from pages --}}
+    {{-- Page-specific scripts --}}
     @stack('scripts')
 
 </body>

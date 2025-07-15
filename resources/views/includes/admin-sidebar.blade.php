@@ -13,7 +13,7 @@
     <ul class="nav flex-column px-3 mt-3">
         {{-- Dashboard --}}
         <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2 active" href="#">
+            <a class="nav-link d-flex align-items-center gap-2 {{ request()->is('admin/dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                 <i class="bi bi-speedometer2"></i> <span class="label">Dashboard</span>
             </a>
         </li>
@@ -59,10 +59,9 @@
         {{-- Academic Structure --}}
         <li class="nav-item mb-1">
             <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.academic-structure.index') ? 'active' : '' }}" 
-            href="{{ route('admin.academic-structure.index') }}">
+                href="{{ route('admin.academic-structure.index') }}">
                 <i class="bi bi-diagram-3"></i> <span class="label">Academic Structure</span>
             </a>
-
         </li>
 
         {{-- Manage Accounts --}}
@@ -73,13 +72,13 @@
             </a>
         </li>
 
-
         {{-- Separator --}}
         <li><hr class="my-3 text-muted"></li>
 
         {{-- Master Data --}}
         <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.master-data.index') ? 'active' : '' }}" 
+                href="{{ route('admin.master-data.index') }}">
                 <i class="bi bi-gear"></i> <span class="label">Master Data</span>
             </a>
         </li>

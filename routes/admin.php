@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\AcademicStructureController;
 use App\Http\Controllers\Admin\ManageFacultyAccountController;
+use App\Http\Controllers\Admin\MasterDataController;
 use App\Http\Middleware\AdminAuth;
 
 // Admin Login View
@@ -64,9 +65,16 @@ Route::middleware([AdminAuth::class])->group(function () {
     Route::post('/manage-accounts/{id}/approve', [ManageFacultyAccountController::class, 'approve'])->name('admin.manage-accounts.approve');
     Route::post('/manage-accounts/{id}/reject', [ManageFacultyAccountController::class, 'reject'])->name('admin.manage-accounts.reject');
 
+    // ✅ Master Data (SO & ILO)
+    Route::get('/master-data', [MasterDataController::class, 'index'])->name('admin.master-data.index');
+    Route::post('/master-data/{type}', [MasterDataController::class, 'store'])->name('admin.master-data.store');
+    Route::put('/master-data/{type}/{id}', [MasterDataController::class, 'update'])->name('admin.master-data.update');
+    Route::delete('/master-data/{type}/{id}', [MasterDataController::class, 'destroy'])->name('admin.master-data.destroy');
+
     // Logout
     Route::post('/logout', function () {
         Auth::logout();
         return redirect()->route('admin.login.form')->with('success', 'Logged out successfully.');
     })->name('admin.logout');
 });
+
