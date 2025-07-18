@@ -1,8 +1,5 @@
 <?php
 
-// File: app/Models/Course.php
-// Description: Eloquent model for Course (Syllaverse)
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,6 +16,8 @@ class Course extends Model
         'units_lec',
         'units_lab',
         'total_units',
+        'contact_hours_lec',
+        'contact_hours_lab',
         'description',
     ];
 
@@ -26,5 +25,16 @@ class Course extends Model
     {
         return $this->belongsTo(Department::class);
     }
-}
 
+    // 🔁 Many-to-Many self-relationship: prerequisites
+    public function prerequisites()
+    {
+        return $this->belongsToMany(Course::class, 'course_prerequisite', 'course_id', 'prerequisite_id');
+    }
+
+    // 🔁 Reverse: list of courses where this course is a prerequisite
+    public function isPrerequisiteFor()
+    {
+        return $this->belongsToMany(Course::class, 'course_prerequisite', 'prerequisite_id', 'course_id');
+    }
+}

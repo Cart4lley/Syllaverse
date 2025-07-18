@@ -1,6 +1,6 @@
 {{-- ------------------------------------------------
 * File: resources/views/admin/academic-structure/modals/edit-course-modal.blade.php
-* Description: Modal for editing a course (Syllaverse)
+* Description: Modal for editing a course (with contact hours and prerequisites) – Syllaverse
 ------------------------------------------------ --}}
 <div class="modal fade" id="editCourseModal" tabindex="-1" aria-labelledby="editCourseModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -30,8 +30,29 @@
                     </div>
                     <div class="w-50">
                         <label for="editCourseLab" class="form-label">Laboratory Units</label>
-                        <input type="number" class="form-control" id="editCourseLab" name="units_lab" min="0" required>
+                        <input type="number" class="form-control" id="editCourseLab" name="units_lab" min="0">
                     </div>
+                </div>
+
+                <div class="mb-3 d-flex gap-3">
+                    <div class="w-50">
+                        <label for="editContactHoursLec" class="form-label">Contact Hours (Lecture)</label>
+                        <input type="number" class="form-control" id="editContactHoursLec" name="contact_hours_lec" min="0" required>
+                    </div>
+                    <div class="w-50">
+                        <label for="editContactHoursLab" class="form-label">Contact Hours (Lab)</label>
+                        <input type="number" class="form-control" id="editContactHoursLab" name="contact_hours_lab" min="0">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="editCoursePrerequisites" class="form-label">Prerequisite(s)</label>
+                    <select class="form-select" id="editCoursePrerequisites" name="prerequisite_ids[]" multiple>
+                        @foreach($courses as $existingCourse)
+                            <option value="{{ $existingCourse->id }}">{{ $existingCourse->code }} – {{ $existingCourse->title }}</option>
+                        @endforeach
+                    </select>
+                    <small class="text-muted">You may select multiple prerequisites. The current course will be excluded automatically.</small>
                 </div>
 
                 <div class="mb-3">

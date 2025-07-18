@@ -16,7 +16,6 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // Block if admin has no department
         if (Auth::user()->department_id === null) {
             return redirect()->back()->with('error', 'You cannot create a course until you are assigned to a department by the Super Admin.');
         }
@@ -25,19 +24,29 @@ class CourseController extends Controller
             'code' => 'required|string|max:25|unique:courses,code',
             'title' => 'required|string|max:255',
             'units_lec' => 'required|integer|min:0',
-            'units_lab' => 'required|integer|min:0',
+            'units_lab' => 'nullable|integer|min:0',
+            'contact_hours_lec' => 'required|integer|min:0',
+            'contact_hours_lab' => 'nullable|integer|min:0',
             'description' => 'nullable|string',
+            'prerequisite_ids' => 'nullable|array',
+            'prerequisite_ids.*' => 'exists:courses,id',
         ]);
 
-        Course::create([
+        $course = Course::create([
             'code' => $request->code,
             'title' => $request->title,
             'units_lec' => $request->units_lec,
-            'units_lab' => $request->units_lab,
-            'total_units' => $request->units_lec + $request->units_lab,
+            'units_lab' => $request->units_lab ?? 0,
+            'total_units' => $request->units_lec + ($request->units_lab ?? 0),
+            'contact_hours_lec' => $request->contact_hours_lec,
+            'contact_hours_lab' => $request->contact_hours_lab,
             'description' => $request->description,
             'department_id' => Auth::user()->department_id,
         ]);
+
+        if ($request->filled('prerequisite_ids')) {
+            $course->prerequisites()->sync($request->prerequisite_ids);
+        }
 
         return redirect()->route('admin.academic-structure.index')->with('course_success', 'Course added successfully!');
     }
@@ -53,18 +62,26 @@ class CourseController extends Controller
             'code' => 'required|string|max:25|unique:courses,code,' . $course->id,
             'title' => 'required|string|max:255',
             'units_lec' => 'required|integer|min:0',
-            'units_lab' => 'required|integer|min:0',
+            'units_lab' => 'nullable|integer|min:0',
+            'contact_hours_lec' => 'required|integer|min:0',
+            'contact_hours_lab' => 'nullable|integer|min:0',
             'description' => 'nullable|string',
+            'prerequisite_ids' => 'nullable|array',
+            'prerequisite_ids.*' => 'exists:courses,id',
         ]);
 
         $course->update([
             'code' => $request->code,
             'title' => $request->title,
             'units_lec' => $request->units_lec,
-            'units_lab' => $request->units_lab,
-            'total_units' => $request->units_lec + $request->units_lab,
+            'units_lab' => $request->units_lab ?? 0,
+            'total_units' => $request->units_lec + ($request->units_lab ?? 0),
+            'contact_hours_lec' => $request->contact_hours_lec,
+            'contact_hours_lab' => $request->contact_hours_lab,
             'description' => $request->description,
         ]);
+
+        $course->prerequisites()->sync($request->prerequisite_ids ?? []);
 
         return redirect()->route('admin.academic-structure.index')->with('course_success', 'Course updated successfully!');
     }
@@ -75,6 +92,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
+        $course->prerequisites()->detach();
         $course->delete();
 
         return redirect()->route('admin.academic-structure.index')->with('course_success', 'Course deleted successfully!');
