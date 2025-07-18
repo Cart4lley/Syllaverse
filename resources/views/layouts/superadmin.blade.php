@@ -1,55 +1,123 @@
-{{--
-------------------------------------------------
+{{-- ------------------------------------------------
 * File: resources/views/layouts/superadmin.blade.php
-* Description: Base layout for all Super Admin pages
-------------------------------------------------
---}}
+* Description: Base layout with drawer and desktop collapse sidebar (Syllaverse)
+------------------------------------------------ --}}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Super Admin • Syllaverse')</title>
-    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@yield('title', 'Super Admin • Syllaverse')</title>
+  <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png" />
 
-    {{-- Bootstrap & Icons --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  {{-- Theme Meta --}}
+  <meta name="theme-color" content="#EE6F57" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
 
-    {{-- Custom CSS --}}
-    
-    @vite('resources/css/superadmin/superadmin-sidebar.css')
-    @vite('resources/css/superadmin/superadmin-navbar.css')
-    @vite('resources/css/superadmin/superadmin-mobile.css')
-    @vite('resources/css/superadmin/superadmin-layout.css')
+  {{-- Bootstrap + Icons --}}
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
-    @vite('resources/css/superadmin/manage-account.css')
-    @vite('resources/css/superadmin/master-data.css')
+  {{-- Feather Icons --}}
+  <script src="https://unpkg.com/feather-icons"></script>
 
+  {{-- Custom CSS --}}
+  @vite('resources/css/superadmin/superadmin-sidebar.css')
+  @vite('resources/css/superadmin/superadmin-navbar.css')
+  @vite('resources/css/superadmin/superadmin-layout.css')
+  @vite('resources/css/syllaverse-colors.css')
+  @vite('resources/css/superadmin/manage-account.css')
+  @vite('resources/css/superadmin/master-data.css')
 
-    @vite('resources/css/syllaverse-colors.css')
-    
-    @stack('styles')
+  @stack('styles')
 </head>
-
 <body class="bg-sv-light">
-    <div class="d-flex" id="wrapper">
-        @include('includes.superadmin-sidebar')
+  <div class="d-flex" id="wrapper">
+    @include('includes.superadmin-sidebar')
 
-        <div id="page-content-wrapper" class="w-100">
-            @include('includes.superadmin-navbar')
+    <div id="page-content-wrapper" class="w-100">
+      @include('includes.superadmin-navbar')
 
-            {{-- Page Content --}}
-            <main class="container-fluid px-4 py-4">
-                @yield('content')
-            </main>
-        </div>
+      {{-- Backdrop overlay for mobile drawer --}}
+      <div id="sidebar-backdrop" class="sidebar-backdrop d-none"></div>
+
+      <main class="container-fluid px-4 py-4">
+        @yield('content')
+      </main>
     </div>
+  </div>
 
-    @stack('scripts')
+  @stack('scripts')
+
+  {{-- Feather icon replacement --}}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof feather !== 'undefined') {
+        feather.replace();
+      }
+    });
+  </script>
+
+  {{-- Sidebar & collapsible script --}}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sidebar = document.getElementById('sidebar');
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const mobileToggleBtn = document.getElementById('sidebarToggle');
+      const desktopCollapseBtn = document.getElementById('sidebarCollapseBtn');
+      const headers = document.querySelectorAll(".collapsible-header");
+
+      // Restore collapse state
+      if (localStorage.getItem('sidebar') === 'collapsed') {
+        document.body.classList.add('sidebar-collapsed');
+      }
+
+      // Mobile drawer toggle
+      function toggleMobileSidebar() {
+        sidebar.classList.toggle('collapsed');
+        backdrop.classList.toggle('d-none');
+      }
+
+      if (mobileToggleBtn && backdrop) {
+        mobileToggleBtn.setAttribute('aria-controls', 'sidebar');
+        mobileToggleBtn.setAttribute('aria-expanded', 'false');
+        mobileToggleBtn.addEventListener('click', () => {
+          toggleMobileSidebar();
+          const expanded = mobileToggleBtn.getAttribute('aria-expanded') === 'true';
+          mobileToggleBtn.setAttribute('aria-expanded', String(!expanded));
+        });
+        backdrop.addEventListener('click', toggleMobileSidebar);
+      }
+
+      // Desktop collapse toggle
+      if (desktopCollapseBtn) {
+        desktopCollapseBtn.setAttribute('aria-controls', 'sidebar');
+        desktopCollapseBtn.setAttribute('aria-expanded', String(!document.body.classList.contains('sidebar-collapsed')));
+        desktopCollapseBtn.addEventListener('click', () => {
+          document.body.classList.toggle('sidebar-collapsed');
+          const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+          localStorage.setItem('sidebar', isCollapsed ? 'collapsed' : 'expanded');
+          desktopCollapseBtn.setAttribute('aria-expanded', String(!isCollapsed));
+        });
+      }
+
+      // Collapsible section toggle (with animation)
+      headers.forEach(header => {
+        const targetId = header.getAttribute("data-target");
+        const body = document.getElementById(targetId);
+
+        header.setAttribute('aria-expanded', String(!body.classList.contains('collapsed')));
+        header.setAttribute('aria-controls', targetId);
+
+        header.addEventListener("click", () => {
+          const isCollapsed = body.classList.contains("collapsed");
+          body.classList.toggle("collapsed");
+          header.setAttribute("aria-expanded", String(!isCollapsed));
+        });
+      });
+    });
+  </script>
 </body>
-
 </html>
