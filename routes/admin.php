@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\ProgramCourseController;
 use App\Http\Controllers\Admin\ProgramController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\AcademicStructureController;
@@ -55,11 +54,6 @@ Route::middleware([AdminAuth::class])->group(function () {
         'destroy' => 'admin.courses.destroy',
     ]);
 
-    // Program-Course Mapping
-    Route::post('/program-courses', [ProgramCourseController::class, 'store'])->name('admin.program-courses.store');
-    Route::delete('/program-courses/{id}', [ProgramCourseController::class, 'destroy'])->name('admin.program-courses.destroy');
-    Route::post('/program-courses/{id}/delete', [ProgramCourseController::class, 'destroy'])->name('admin.program-courses.fallback');
-
     // ✅ Manage Faculty Accounts (Pending, Approve, Reject)
     Route::get('/manage-accounts', [ManageFacultyAccountController::class, 'index'])->name('admin.manage-accounts');
     Route::post('/manage-accounts/{id}/approve', [ManageFacultyAccountController::class, 'approve'])->name('admin.manage-accounts.approve');
@@ -77,4 +71,3 @@ Route::middleware([AdminAuth::class])->group(function () {
         return redirect()->route('admin.login.form')->with('success', 'Logged out successfully.');
     })->name('admin.logout');
 });
-

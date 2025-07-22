@@ -1,20 +1,23 @@
 <?php
 
 // File: app/Http/Controllers/Admin/MasterDataController.php
-// Description: Handles SO and ILO management with course filtering (Syllaverse)
+// Description: Handles SO, ILO, Programs, and Courses management (Syllaverse)
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\StudentOutcome;
 use App\Models\IntendedLearningOutcome;
+use App\Models\Program;
 use App\Models\Course;
 
 class MasterDataController extends Controller
 {
     public function index(Request $request)
     {
+        $user = Auth::user();
         $selectedCourseId = $request->input('course_id');
 
         return view('admin.master-data.index', [
@@ -22,7 +25,8 @@ class MasterDataController extends Controller
             'intendedLearningOutcomes' => $selectedCourseId
                 ? IntendedLearningOutcome::where('course_id', $selectedCourseId)->get()
                 : collect(),
-            'courses' => Course::all(),
+            'courses' => Course::where('department_id', $user->department_id)->get(),
+            'programs' => Program::where('department_id', $user->department_id)->get(),
         ]);
     }
 

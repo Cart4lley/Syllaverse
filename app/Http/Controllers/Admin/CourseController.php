@@ -48,7 +48,7 @@ class CourseController extends Controller
             $course->prerequisites()->sync($request->prerequisite_ids);
         }
 
-        return redirect()->route('admin.academic-structure.index')->with('course_success', 'Course added successfully!');
+        return redirect()->route('admin.master-data.index')->with('course_success', 'Course added successfully!');
     }
 
     /**
@@ -83,7 +83,7 @@ class CourseController extends Controller
 
         $course->prerequisites()->sync($request->prerequisite_ids ?? []);
 
-        return redirect()->route('admin.academic-structure.index')->with('course_success', 'Course updated successfully!');
+        return redirect()->route('admin.master-data.index')->with('course_success', 'Course updated successfully!');
     }
 
     /**
@@ -95,6 +95,6 @@ class CourseController extends Controller
         $course->prerequisites()->detach();
         $course->delete();
 
-        return redirect()->route('admin.academic-structure.index')->with('course_success', 'Course deleted successfully!');
+        return redirect()->route('admin.master-data.index')->with('course_success', 'Course deleted successfully!');
     }
 }

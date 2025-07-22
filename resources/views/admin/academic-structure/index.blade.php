@@ -34,7 +34,6 @@
     {{-- Modals --}}
     @include('admin.academic-structure.modals.add-program-modal')
     @include('admin.academic-structure.modals.edit-program-modal')
-    @include('admin.academic-structure.modals.manage-program-courses-modal')
     @include('admin.academic-structure.modals.add-course-modal')
     @include('admin.academic-structure.modals.edit-course-modal')
 @endsection

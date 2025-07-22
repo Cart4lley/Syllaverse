@@ -18,49 +18,10 @@
             </a>
         </li>
 
-        {{-- Notification --}}
-        <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-bell"></i> <span class="label">Notification</span>
-            </a>
-        </li>
-
-        {{-- Calendar --}}
-        <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-calendar-event"></i> <span class="label">Calendar</span>
-            </a>
-        </li>
-
-        {{-- Separator --}}
-        <li><hr class="my-3 text-muted"></li>
-
         {{-- Syllabi --}}
         <li class="nav-item mb-1">
             <a class="nav-link d-flex align-items-center gap-2" href="#">
                 <i class="bi bi-book"></i> <span class="label">Syllabi</span>
-            </a>
-        </li>
-
-        {{-- Faculty --}}
-        <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-people"></i> <span class="label">Faculty</span>
-            </a>
-        </li>
-
-        {{-- Class --}}
-        <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-door-open"></i> <span class="label">Class</span>
-            </a>
-        </li>
-
-        {{-- Academic Structure --}}
-        <li class="nav-item mb-1">
-            <a class="nav-link d-flex align-items-center gap-2 {{ request()->routeIs('admin.academic-structure.index') ? 'active' : '' }}" 
-                href="{{ route('admin.academic-structure.index') }}">
-                <i class="bi bi-diagram-3"></i> <span class="label">Academic Structure</span>
             </a>
         </li>
 

@@ -35,7 +35,7 @@ class ProgramController extends Controller
             'created_by' => Auth::id(),
         ]);
 
-        return redirect()->route('admin.academic-structure.index')->with('success', 'Program added successfully!');
+        return redirect()->route('admin.master-data.index')->with('success', 'Program added successfully!');
     }
 
     /**
@@ -57,7 +57,7 @@ class ProgramController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('admin.academic-structure.index')->with('success', 'Program updated successfully!');
+        return redirect()->route('admin.master-data.index')->with('success', 'Program updated successfully!');
     }
 
     /**
@@ -68,6 +68,6 @@ class ProgramController extends Controller
         $program = Program::findOrFail($id);
         $program->delete();
 
-        return redirect()->route('admin.academic-structure.index')->with('success', 'Program deleted successfully!');
+        return redirect()->route('admin.master-data.index')->with('success', 'Program deleted successfully!');
     }
 }

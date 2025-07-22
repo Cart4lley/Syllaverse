@@ -1,6 +1,6 @@
 {{-- ------------------------------------------------
 * File: resources/views/admin/academic-structure/tabs/programs-tab.blade.php
-* Description: Tab content for Program List (Admin Academic Structure)
+* Description: Tab content for Program List (Admin Academic Structure) – no course mapping
 ------------------------------------------------ --}}
 <div class="tab-pane fade show active" id="programs" role="tabpanel">
     <div class="card border-0 shadow-sm p-4">
@@ -65,18 +65,20 @@
                         <td>{{ $program->created_at->format('Y-m-d') }}</td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProgramModal"
-                                data-id="{{ $program->id }}" data-name="{{ $program->name }}" data-code="{{ $program->code }}" data-description="{{ $program->description }}" onclick="setEditProgram(this)">
+                                data-id="{{ $program->id }}"
+                                data-name="{{ $program->name }}"
+                                data-code="{{ $program->code }}"
+                                data-description="{{ $program->description }}"
+                                onclick="setEditProgram(this)">
                                 <i class="bi bi-pencil"></i>
                             </button>
                             <form action="{{ route('admin.programs.destroy', $program->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </form>
-                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#manageCoursesModal"
-                                data-program-id="{{ $program->id }}" data-program-name="{{ $program->name }}" onclick="loadProgramCourses(this)">
-                                <i class="bi bi-list-task"></i>
-                            </button>
                         </td>
                     </tr>
                 @empty
