@@ -1,34 +1,47 @@
 {{-- 
 ------------------------------------------------
 * File: resources/views/includes/faculty-navbar.blade.php
-* Top Navbar for Faculty Dashboard (Syllaverse)
+* Description: Responsive, glassmorphic Faculty Navbar – Syllaverse
 ------------------------------------------------ 
 --}}
-<nav class="navbar navbar-expand navbar-light bg-light shadow-sm px-4 py-2">
-    <div class="container-fluid justify-content-between">
-        <span class="navbar-text text-muted small">
-            Welcome, {{ Auth::user()->name ?? 'Faculty' }}
-        </span>
+<nav class="navbar navbar-expand-lg shadow-sm bg-white border-bottom px-4 py-3 glass-navbar sticky-top" role="navigation" aria-label="Faculty Top Navbar" style="z-index:1000;">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <button id="sidebarToggle" class="btn d-lg-none hamburger-btn" type="button" aria-label="Toggle sidebar">
+      <i class="bi bi-list fs-3 text-dark"></i>
+    </button>
 
-        {{-- Profile Dropdown (optional, expandable later) --}}
-        <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-muted" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle me-1"></i> Profile
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <form action="{{ route('faculty.logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item text-danger">
-                                <i class="bi bi-box-arrow-right me-1"></i> Logout
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <h5 class="mb-0 fw-bold navbar-title flex-grow-1">@yield('page-title', 'Dashboard')</h5>
+
+    <div class="dropdown d-flex align-items-center">
+      <a class="d-flex align-items-center text-decoration-none dropdown-toggle faculty-dropdown" href="#" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="fw-semibold text-dark d-none d-lg-inline">{{ Auth::user()->name ?? 'Faculty' }}</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end shadow-sm animate__animated animate__fadeIn" aria-labelledby="profileDropdown" style="min-width: 180px;">
+        <li><a class="dropdown-item d-flex align-items-center" href="#"><i class="bi bi-person me-2"></i> Edit Profile</a></li>
+        <li><button class="dropdown-item d-flex align-items-center" id="themeToggleBtn" type="button"><i class="bi bi-moon me-2"></i> Toggle Theme</button></li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <form action="{{ route('faculty.logout') }}" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="dropdown-item d-flex align-items-center text-danger" style="border: none; background: none;">
+              <i class="bi bi-box-arrow-right me-2"></i> Logout
+            </button>
+          </form>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
+
+@push('scripts')
+<script>
+  document.getElementById('themeToggleBtn')?.addEventListener('click', function () {
+    document.body.classList.toggle('dark-theme');
+    const icon = this.querySelector('i');
+    icon.classList.toggle('bi-moon');
+    icon.classList.toggle('bi-brightness-high');
+    icon.classList.add('theme-anim');
+    setTimeout(() => icon.classList.remove('theme-anim'), 300);
+  });
+</script>
+@endpush

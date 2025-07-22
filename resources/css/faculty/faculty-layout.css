@@ -1,0 +1,62 @@
+/* 
+------------------------------------------------
+* File: resources/css/faculty/faculty-layout.css
+* Description: Main layout styles for Faculty – handles spacing, layout, and content height
+------------------------------------------------ 
+*/
+
+/* Ensure wrapper uses full screen height */
+#wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  background-color: #FAFAFA;
+}
+
+/* Page content wrapper */
+#page-content-wrapper {
+  flex-grow: 1;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content area */
+main {
+  flex-grow: 1;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  min-height: 500px;
+  overflow-x: hidden;
+  background-color: #FAFAFA;
+}
+
+/* Sidebar transition responsiveness */
+body.sidebar-collapsed #page-content-wrapper main {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+/* Mobile spacing */
+@media (max-width: 991.98px) {
+  #page-content-wrapper main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Optional utility classes */
+.content-panel {
+  display: none;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.content-panel.active {
+  display: block;
+}
