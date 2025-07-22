@@ -12,5 +12,12 @@ class IntendedLearningOutcome extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'description'];
+    // 🛠️ Include course_id to allow saving course-linked ILOs
+    protected $fillable = ['code', 'description', 'course_id'];
+
+    // 🔁 Relationship: Each ILO belongs to one course
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }
