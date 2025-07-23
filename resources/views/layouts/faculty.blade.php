@@ -31,6 +31,13 @@
   @vite('resources/css/faculty/faculty-layout.css')
   @vite('resources/css/syllaverse-colors.css')
 
+  {{-- Syllabus Module Styles & Scripts --}}
+  @vite('resources/css/faculty/syllabus.css')
+  @vite('resources/js/faculty/syllabus.js')
+  <script>
+    const syllabusExitUrl = @json(route('faculty.syllabi.index'));
+  </script>
+
   @stack('styles')
 </head>
 <body class="bg-sv-light">

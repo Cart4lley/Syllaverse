@@ -1,0 +1,74 @@
+/* 
+------------------------------------------------
+File: resources/css/faculty/syllabus.css
+Description: CIS-style syllabus editor layout for faculty with WYSIWYG-like formatting (Syllaverse)
+------------------------------------------------ 
+*/
+
+.syllabus-doc {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #222;
+}
+
+.section-heading {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin-bottom: 0.75rem;
+}
+
+textarea.form-control {
+  border: none;
+  background-color: transparent;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  min-height: 120px;
+  color: #000;
+}
+
+textarea.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #fffbe6;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.btn-save, .btn-exit {
+  padding: 8px 20px;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.btn-save {
+  background-color: #CB3737;
+  color: white;
+  border: none;
+}
+
+.btn-exit {
+  background-color: #E3E3E3;
+  color: #333;
+  border: none;
+}
+
+.form-actions button:hover {
+  opacity: 0.9;
+}
+
+
+.section-heading {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: underline;
+  margin-bottom: 0.75rem;
+}

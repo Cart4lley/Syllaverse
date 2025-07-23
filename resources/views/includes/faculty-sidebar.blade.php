@@ -31,7 +31,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link d-flex align-items-center" href="#">
+      <a class="nav-link d-flex align-items-center @if(request()->is('faculty/syllabi*')) active @endif" href="{{ route('faculty.syllabi.index') }}">
         <i class="bi bi-files-alt"></i> <span class="label">Syllabi</span>
       </a>
     </li>
