@@ -78,5 +78,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/admin/academic-structure.js')
+    @vite('resources/js/admin/master-data.js')
 @endpush

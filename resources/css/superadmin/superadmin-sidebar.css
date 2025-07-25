@@ -1,7 +1,7 @@
 /* 
 ------------------------------------------------
 * File: resources/css/superadmin/superadmin-sidebar.css
-* Description: Sidebar styles for Syllaverse Super Admin (updated for mobile separator hide & mobile collapsed mode)
+* Description: Sidebar styles for Syllaverse Super Admin (reduced separator spacing around collapse button)
 ------------------------------------------------ 
 */
 
@@ -50,11 +50,11 @@
   display: none;
 }
 
-/* Sidebar Separator (matches header border) */
+/* Sidebar Separator (reduced spacing around collapse button) */
 .sidebar-separator {
   border-bottom: 1.5px solid #e3e3e3;
   width: 100%;
-  margin-top: 8px;    /* Balanced spacing */
+  margin-top: 8px;
   margin-bottom: 8px;
 }
 
@@ -62,7 +62,8 @@ body.sidebar-collapsed .sidebar-separator {
   width: 40px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 28px;   /* Larger gap in collapsed mode */
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 /* Hide bottom separator on mobile */
@@ -85,12 +86,10 @@ body.sidebar-collapsed .sidebar-separator {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, opacity 0.2s ease;
   }
-
   #sidebar.collapsed {
     transform: translateX(0);
     opacity: 1;
   }
-
   .sidebar-backdrop {
     position: fixed;
     inset: 0;
@@ -128,10 +127,7 @@ body.sidebar-collapsed #sidebar ul.nav {
   width: 100%;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  margin: 0 !important;
   gap: 0.5rem;
 }
 
@@ -141,10 +137,7 @@ body.sidebar-collapsed #sidebar .nav-link {
   justify-content: center;
   width: 48px;
   height: 48px;
-  padding: 0;
-  margin-bottom: 12px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 12px;
   border-radius: 14px;
   transition: all 0.3s ease;
   background: transparent;
@@ -211,7 +204,6 @@ body.sidebar-collapsed .sidebar-logo-collapsed {
   -webkit-backdrop-filter: blur(6px);
   color: #CB3737;
   box-shadow: 0 4px 8px rgba(204, 55, 55, 0.1);
-  transform: none;
 }
 
 #sidebarCollapseBtn:active {

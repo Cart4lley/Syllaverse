@@ -1,4 +1,4 @@
-// File: public/js/admin/academic-structure.js
+// File: public/js/admin/master-data.js
 // Description: Handles modal form population for editing programs and courses (Syllaverse)
 
 window.setEditProgram = function(button) {
